@@ -1,0 +1,79 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Attendance;
+use App\Models\AttendanceHistory;
+use Illuminate\Support\Str;
+
+class AttendanceSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $attId1 = Str::uuid();
+        $attId2 = Str::uuid();
+
+        // Absensi Pegawai 1
+        Attendance::create([
+            'employee_id' => 1,
+            'attendance_id' => $attId1,
+            'clock_in' => now()->setTime(07, 55, 0), // On time
+            'clock_out' => now()->setTime(17, 5, 0),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        AttendanceHistory::insert([
+            [
+                'attendance_id' => $attId1,
+                'employee_id' => 1,
+                'date_attendance' => now()->setTime(07, 55, 0),
+                'attendance_type' => 1,
+                'description' => 'Masuk Tepat Waktu',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'attendance_id' => $attId1,
+                'employee_id' => 1,
+                'date_attendance' => now()->setTime(17, 5, 0),
+                'attendance_type' => 2,
+                'description' => 'Pulang Tepat Waktu',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
+
+        // Absensi Pegawai 2
+        Attendance::create([
+            'employee_id' => 2,
+            'attendance_id' => $attId2,
+            'clock_in' => now()->setTime('09', 15, 0), // Late
+            'clock_out' => now()->setTime(17, 30, 0), // Early Leave
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        AttendanceHistory::insert([
+            [
+                'attendance_id' => $attId2,
+                'employee_id' => 2,
+                'date_attendance' => now()->setTime('09', 15, 0),
+                'attendance_type' => 1,
+                'description' => 'Terlambat Masuk',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'attendance_id' => $attId2,
+                'employee_id' => 2,
+                'date_attendance' => now()->setTime(17, 30, 0),
+                'attendance_type' => 2,
+                'description' => 'Pulang Lebih Awal',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
+    }
+}

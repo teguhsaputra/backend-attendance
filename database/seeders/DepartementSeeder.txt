@@ -1,0 +1,29 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Departement;
+
+class DepartementSeeder extends Seeder
+{
+    public function run(): void
+    {
+        Departement::insert([
+            [
+                'departement_name' => 'IT',
+                'max_clock_in_time' => '08:00:00',
+                'max_clock_out_time' => '17:00:00',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'departement_name' => 'HRD',
+                'max_clock_in_time' => '09:00:00',
+                'max_clock_out_time' => '18:00:00',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
+    }
+}

@@ -1,0 +1,172 @@
+{
+  "info": {
+    "name": "Attendance API",
+    "_postman_id": "12345678-abcd-efgh-ijkl-1234567890ab",
+    "description": "Collection untuk test Departemen, Employee, dan Attendance API dengan filter logs berdasarkan tanggal & departemen, termasuk update dan detail",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Departemen",
+      "item": [
+        {
+          "name": "List Departemen",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/departements"
+          }
+        },
+        {
+          "name": "Tambah Departemen",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"departement_name\": \"Finance\",\n    \"max_clock_in_time\": \"08:30:00\",\n    \"max_clock_out_time\": \"17:30:00\"\n}"
+            },
+            "url": "{{base_url}}/api/departements"
+          }
+        },
+        {
+          "name": "Detail Departemen",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/departements/1"
+          }
+        },
+        {
+          "name": "Update Departemen",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"departement_name\": \"IT Updated\",\n    \"max_clock_in_time\": \"08:00:00\",\n    \"max_clock_out_time\": \"17:00:00\"\n}"
+            },
+            "url": "{{base_url}}/api/departements/1"
+          }
+        },
+        {
+          "name": "Hapus Departemen",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/departements/1"
+          },
+          "description": "Hapus departemen dengan ID tertentu. Gagal jika masih dipakai employee."
+        }
+      ]
+    },
+    {
+      "name": "Employee",
+      "item": [
+        {
+          "name": "List Employees",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/employees"
+          }
+        },
+        {
+          "name": "Tambah Employee",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"employee_id\": \"EMP003\",\n    \"departement_id\": 1,\n    \"name\": \"Siti Aminah\",\n    \"address\": \"Jl. Anggrek No. 3\"\n}"
+            },
+            "url": "{{base_url}}/api/employees"
+          }
+        },
+        {
+          "name": "Detail Employee",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/employees/1"
+          }
+        },
+        {
+          "name": "Update Employee",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Teguh Saputra Updated\",\n    \"departement_id\": 2,\n    \"address\": \"Jl. Merpati No. 99\"\n}"
+            },
+            "url": "{{base_url}}/api/employees/1"
+          }
+        },
+        {
+          "name": "Hapus Employee",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/employees/1"
+          },
+          "description": "Hapus employee dengan ID tertentu. Jika ada attendance, ikut terhapus juga."
+        }
+      ]
+    },
+    {
+      "name": "Attendance",
+      "item": [
+        {
+          "name": "Absen Masuk",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"employee_id\": 1\n}"
+            },
+            "url": "{{base_url}}/api/attendance/check-in"
+          }
+        },
+        {
+          "name": "Absen Keluar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": "{{base_url}}/api/attendance/check-out/5"
+          },
+          "description": "Gunakan ID attendance, bukan employee_id."
+        },
+        {
+          "name": "List Log Absensi",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/attendance/logs?date=2025-08-16&department_id=1"
+          },
+          "description": "List log absensi karyawan dengan filter tanggal & departemen. Tampilkan status ketepatan absensi (Tepat Waktu/Terlambat/Pulang Cepat)."
+        },
+        {
+          "name": "List Log per Employee",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/attendance/logs/1"
+          },
+          "description": "Lihat semua log absensi untuk employee dengan ID 1."
+        },
+        {
+          "name": "Hapus Semua Log per Employee",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/attendance/logs/1"
+          },
+          "description": "Hapus semua log absensi untuk employee dengan ID 1."
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    }
+  ]
+}
