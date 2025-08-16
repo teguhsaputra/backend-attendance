@@ -40,7 +40,7 @@ DB_PASSWORD=
 5. Jalankan migrasi:
 
 ```bash
-php artisan migrate:fresh
+php artisan migrate:fresh --seed
 ```
 
 6. Jalankan server:

@@ -11,21 +11,13 @@ class EmployeeSeeder extends Seeder
     {
         Employee::insert([
             [
-                'employee_id' => 'EMP001',
+                'employee_id' => 'EMP-1',
                 'departement_id' => 1,
                 'name' => 'Teguh Saputra',
                 'address' => 'Jl. Merpati No. 1',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'employee_id' => 'EMP002',
-                'departement_id' => 2,
-                'name' => 'Budi Santoso',
-                'address' => 'Jl. Kenari No. 2',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
+            ],          
         ]);
     }
 }

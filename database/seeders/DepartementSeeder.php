@@ -17,13 +17,6 @@ class DepartementSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'departement_name' => 'HRD',
-                'max_clock_in_time' => '09:00:00',
-                'max_clock_out_time' => '18:00:00',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
         ]);
     }
 }
